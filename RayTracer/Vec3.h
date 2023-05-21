@@ -106,6 +106,16 @@ inline Vec3 random_in_unit_sphere() {
 	}
 }
 
+inline Vec3 random_in_unit_disk()
+{
+	while (true)
+	{
+		auto p = Vec3(random_double(-1, 1), random_double(-1, 1), 0);
+		if (p.length_squared() >= 1) continue;
+		return p;
+	}
+}
+
 inline Vec3 random_unit_vector() {
 	return unit_vector(random_in_unit_sphere());
 }
@@ -131,3 +141,4 @@ inline Vec3 refract(const Vec3& uv, const Vec3& n, double etai_over_etat)
 	Vec3 r_out_parallel = -sqrt(fabs(1.0 - r_out_perp.length_squared())) * n;
 	return r_out_parallel + r_out_perp;
 }
+
