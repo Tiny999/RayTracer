@@ -3,6 +3,9 @@
 #include <cmath>
 #include <iostream>
 
+#include "Rtweekend.h"
+
+
 using std::sqrt;
 
 class Vec3
@@ -25,6 +28,14 @@ public:
 
 	double length() const;
 	double length_squared() const;
+
+	inline static Vec3 random() {
+		return Vec3(random_double(), random_double(), random_double());
+	}
+
+	inline static Vec3 random(double min, double max) {
+		return Vec3(random_double(min, max), random_double(min, max), random_double(min, max));
+	}
 
 public:
 	double e[3];
@@ -81,3 +92,23 @@ inline Vec3 unit_vector(Vec3 v) {
 	return v / v.length();
 }
 
+inline Vec3 random_in_unit_sphere() {
+	while (true) {
+		auto p = Vec3::random(-1,1);
+		if (p.length_squared() >= 1) continue;
+		return p;
+	}
+}
+
+inline Vec3 random_unit_vector() {
+	return unit_vector(random_in_unit_sphere());
+}
+
+inline Vec3 random_in_hemisphere(const Vec3& normal)
+{
+	Vec3 in_unit_sphere = random_in_unit_sphere();
+	if (dot(in_unit_sphere, normal) > 0.0) // In the same hemisphere as the normal
+		return in_unit_sphere;
+	else
+		return -in_unit_sphere;
+}
