@@ -65,5 +65,11 @@
     <ClInclude Include="Material.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Lambertian.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Metal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
